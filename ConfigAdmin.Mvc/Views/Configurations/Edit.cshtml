@@ -1,0 +1,34 @@
+﻿@model ConfigAdmin.Mvc.Models.ConfigViewModel
+
+<h2>Edit Configuration</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Type</label>
+        <input asp-for="Type" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Value</label>
+        <input asp-for="Value" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>ApplicationName</label>
+        <input asp-for="ApplicationName" class="form-control" />
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label class="form-check-label">Is Active</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

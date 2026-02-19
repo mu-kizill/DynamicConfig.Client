@@ -1,0 +1,56 @@
+﻿@model List<ConfigAdmin.Mvc.Models.ConfigViewModel>
+
+<h2>Configurations</h2>
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">Add New</a>
+</div>
+
+<input type="text" id="searchInput" placeholder="Search by name..." class="form-control mb-3" />
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Value</th>
+            <th>IsActive</th>
+            <th>ApplicationName</th>
+            <th style="width:150px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Type</td>
+                <td>@item.Value</td>
+                <td>@item.IsActive</td>
+                <td>@item.ApplicationName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Are you sure?');">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let value = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#tableBody tr");
+
+        rows.forEach(row => {
+            let name = row.cells[0].innerText.toLowerCase();
+            row.style.display = name.includes(value) ? "" : "none";
+        });
+    });
+</script>

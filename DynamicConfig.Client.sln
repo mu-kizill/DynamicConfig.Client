@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceA", "ServiceA\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigAdmin.Api", "ConfigAdmin.Api\ConfigAdmin.Api.csproj", "{E7DB052F-9EC7-4A72-8BC4-41DF5FC02DCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigAdmin.Mvc", "ConfigAdmin.Mvc\ConfigAdmin.Mvc.csproj", "{F7A9EAE6-F88F-4A92-9139-B20EB55AF52E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E7DB052F-9EC7-4A72-8BC4-41DF5FC02DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7DB052F-9EC7-4A72-8BC4-41DF5FC02DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7DB052F-9EC7-4A72-8BC4-41DF5FC02DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A9EAE6-F88F-4A92-9139-B20EB55AF52E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A9EAE6-F88F-4A92-9139-B20EB55AF52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A9EAE6-F88F-4A92-9139-B20EB55AF52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A9EAE6-F88F-4A92-9139-B20EB55AF52E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

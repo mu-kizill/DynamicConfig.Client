@@ -9,7 +9,7 @@ namespace DynamicConfig.Client;
 public class ConfigurationReader : IConfigurationReader, IDisposable
 {
     private readonly string _applicationName;
-    private readonly DbConfigProvider _provider;
+    private readonly IConfigProvider _provider;
     private readonly ConfigCache _cache = new();
 
     private readonly PeriodicTimer _timer;
@@ -25,18 +25,18 @@ public class ConfigurationReader : IConfigurationReader, IDisposable
     private Task? _backgroundTask;
 
     public ConfigurationReader(
-        string applicationName,
-        string connectionString,
-        int refreshIntervalMs)
+    string applicationName,
+    IConfigProvider provider,
+    int refreshIntervalMs)
     {
         _applicationName = applicationName;
-        _provider = new DbConfigProvider(provider);
+        _provider = provider ?? throw new ArgumentNullException(nameof(provider));
 
         _timer = new PeriodicTimer(TimeSpan.FromMilliseconds(refreshIntervalMs));
 
-        // Background worker başlat
         _backgroundTask = Task.Run(StartAsync);
     }
+
 
     private async Task StartAsync()
     {

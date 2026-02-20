@@ -8,7 +8,7 @@ using DynamicConfig.Client.Models;
 
 namespace DynamicConfig.Client.Providers;
 
-public class DbConfigProvider
+public class DbConfigProvider : IConfigProvider
 {
     private readonly string _connectionString;
 

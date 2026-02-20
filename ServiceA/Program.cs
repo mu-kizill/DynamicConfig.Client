@@ -1,4 +1,5 @@
 ﻿using DynamicConfig.Client;
+using DynamicConfig.Client.Providers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +11,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IConfigurationReader>(sp =>
-    new ConfigurationReader(
-        "SERVICE-A",
-        builder.Configuration.GetConnectionString("ConfigDb"),
-        1000));
+{
+    var connectionString =
+        builder.Configuration.GetConnectionString("ConfigDb");
+
+    var provider = new DbConfigProvider(connectionString);
+
+    return new ConfigurationReader("SERVICE-A", provider, 5000);
+});
+
+
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

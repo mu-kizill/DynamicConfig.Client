@@ -34,20 +34,25 @@ Testlerde gerçek storage yerine fake provider kullanldı.
 ÇALIŞTIRMAK İÇİN :
 MSSQL üzerinde Configurations tablosu oluşturulur : 
 
-CREATE TABLE Configurations(
+
+    CREATE TABLE Configurations(
     Id INT PRIMARY KEY IDENTITY,
     Name NVARCHAR(100),
     Type NVARCHAR(50),
     Value NVARCHAR(500),
     IsActive BIT,
     ApplicationName NVARCHAR(100),
-    ModifiedAt DATETIME
-);
+    ModifiedAt DATETIME  );  
 
 
-Örnek bir kayıt eklemek için:
-INSERT INTO Configurations (Name, Type, Value, IsActive, ApplicationName, ModifiedAt)
-VALUES ('SiteName', 'string', 'soty.io', 1, 'SERVICE-A', GETDATE());
+
+
+Örnek bir kayıt eklemek için :
+
+    INSERT INTO Configurations(Name,Type,Value,IsActive,ApplicationName,ModifiedAt)
+    VALUES('SiteName','string','soty.io',1,'SERVICE-A',GETDATE())   
+   
+
 
 ConfigAdmin.Api ve ServiceA kısımlarındaki appsettings.json veritabanı bağlantıları uygun şekilde düzeltilir.
 

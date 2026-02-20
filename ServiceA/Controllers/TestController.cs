@@ -6,20 +6,19 @@ namespace ServiceA.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class TestController : ControllerBase
-{
-    private static ConfigurationReader _reader;
-
-    public TestController(IConfiguration configuration)
+{    
+    private readonly IConfigurationReader _reader;
+    
+    public TestController(IConfigurationReader reader)
     {
-        _reader ??= new ConfigurationReader(
-            "SERVICE-A",
-            configuration.GetConnectionString("ConfigDb"),
-            5000);
+        _reader = reader;
     }
 
     [HttpGet]
     public string Get()
-    {
+    {        
         return _reader.GetValue<string>("SiteName");
     }
+
+
 }

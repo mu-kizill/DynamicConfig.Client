@@ -9,14 +9,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IConfigurationReader>(sp =>
+    new ConfigurationReader(
+        "SERVICE-A",
+        builder.Configuration.GetConnectionString("ConfigDb"),
+        1000));
+
 var app = builder.Build();
-
-var configReader = new ConfigurationReader(
-    "SERVICE-A",
-    builder.Configuration.GetConnectionString("ConfigDb"),
-    5000 // 5 saniye
-);
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

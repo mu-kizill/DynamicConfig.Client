@@ -14,25 +14,38 @@ Proje 3 ana parçadan oluşuyor :
 
 ÇALIŞMA MANTIĞI : 
 
-ConfigurationReader başlatıldığında, ilgili uygulamanın (ApplicationName) sadece aktif konfügürasyon kayıtlarını db'den okuyup önbelleğe alır.
+ConfigurationReader başlatıldığında, ilgili uygulamaya (ApplicationName) ait aktif konfigürasyon kayıtlarını veritabanından okuyarak belleğe alır.
 
-Ardından belirlenen periotlarda veritabanı kontrol edilir yalnızca eklenen ya da değişen kayıtları algılayıp önbelleği buna göre günceller.
+Sonrasında belirlenen periyotlarda veritabanı kontrol edilir. Yalnızca yeni eklenen veya değişen kayıtlar tespit edilerek cache güncellenir.
 
-Bu sayede uygulama yeniden başlatılmadan kofigürasyon değişiklikleri servise anlık olarak yansır ve kod tarafından yeni değerler kullanılmaya başlanır.
+Bu sayede uygulama yeniden başlatılmadan konfigürasyon değişiklikleri servise yansır.
 
-var reader = new ConfigurationReader("SERVICE-A", provider, 5000);
 
-var siteName = reader.GetValue<string>("SiteName");
+ var reader = new ConfigurationReader("SERVICE-A", provider, 5000);
+ var siteName = reader.GetValue<string>("SiteName");
+ 
+    
+    var reader = new ConfigurationReader("SERVICE-A", provider, 5000);
+    var siteName = reader.GetValue<string>("SiteName");
 
 
 TESTLER : 
 
-DynamicConfig.Client için xUnit ile temel unit testler yazıldı. string ve int değerlerinin doğru parse edilmesi, olmayan bir key için uygun exception fırlatılması, konfigürasyonların test ortamında DB'ye ihtiyaç duymadan çalıştırılbilmesi gibi senaryolar test edildi.
-Testlerde gerçek storage yerine fake provider kullanldı.
+DynamicConfig.Client için xUnit ile temel unit testler yazılmıştır.
+
+Test edilen senaryolar:
+
+- string ve int değerlerin doğru parse edilmesi
+
+- Olmayan bir key için uygun exception fırlatılması
+
+- Test ortamında gerçek veritabanına ihtiyaç duyulmadan çalışabilmesi
+
+Testlerde gerçek storage yerine fake provider kullanılmıştır.
 
 
 ÇALIŞTIRMAK İÇİN :
-MSSQL üzerinde Configurations tablosu oluşturulur : 
+1- MSSQL üzerinde aşağıdaki tabloyu oluştur: 
 
 
     CREATE TABLE Configurations(
@@ -47,17 +60,17 @@ MSSQL üzerinde Configurations tablosu oluşturulur :
 
 
 
-Örnek bir kayıt eklemek için :
+2- Örnek veri ekle:
 
     INSERT INTO Configurations(Name,Type,Value,IsActive,ApplicationName,ModifiedAt)
     VALUES('SiteName','string','soty.io',1,'SERVICE-A',GETDATE())   
    
 
 
-ConfigAdmin.Api ve ServiceA kısımlarındaki appsettings.json veritabanı bağlantıları uygun şekilde düzeltilir.
+3- ConfigAdmin.Api ve ServiceA projelerindeki connection string’leri güncelle.
 
-ConfigAdmin.Api ve ConfigAdmin.Mvc projeleri birlikte çalıştırılır.
+4- ConfigAdmin.Api ve ConfigAdmin.Mvc projelerini birlikte çalıştır.
 
-Arayüz üzerinden kayıt eklenir, update veya delete edilir.
+5- UI üzerinden kayıt ekle/güncelle/sil.
 
-ServiceA tarafında değişikliklerin anında yansıdığı gözlemlenebilir.
+6- ServiceA tarafında değişikliklerin anında yansıdığını gözlemle.

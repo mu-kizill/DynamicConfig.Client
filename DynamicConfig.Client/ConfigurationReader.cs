@@ -30,7 +30,7 @@ public class ConfigurationReader : IConfigurationReader, IDisposable
         int refreshIntervalMs)
     {
         _applicationName = applicationName;
-        _provider = new DbConfigProvider(connectionString);
+        _provider = new DbConfigProvider(provider);
 
         _timer = new PeriodicTimer(TimeSpan.FromMilliseconds(refreshIntervalMs));
 

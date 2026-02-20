@@ -45,6 +45,7 @@ Testlerde gerçek storage yerine fake provider kullanılmıştır.
 
 
 ÇALIŞTIRMAK İÇİN :
+
 1- MSSQL üzerinde aşağıdaki tabloyu oluştur: 
 
 
